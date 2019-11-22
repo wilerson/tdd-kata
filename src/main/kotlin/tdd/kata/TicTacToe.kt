@@ -19,7 +19,7 @@ class TicTacToe(
                 }
             }
         }
-        return areAllFieldsInOneColumnTaken() || areAllFieldsInOneRowTaken() || (fieldsTaken == 9)
+        return areAllFieldsInOneColumnTaken() || areAllFieldsInOneRowTaken() || areDiagonalsTakenForOnePlayer() || (fieldsTaken == 9)
     }
 
     private fun areAllFieldsInOneColumnTaken(): Boolean {
@@ -42,5 +42,11 @@ class TicTacToe(
             if (abs(sumOfFieldValues) == 3) return true
         }
         return false
+    }
+
+    fun areDiagonalsTakenForOnePlayer(): Boolean {
+        val diagonalOne = abs(gameState[0][0] + gameState[1][1] + gameState[2][2]) == 3
+        val diagonalTwo = abs(gameState[0][2] + gameState[1][1] + gameState[2][0]) == 3
+        return diagonalOne || diagonalTwo
     }
 }
