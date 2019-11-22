@@ -7,4 +7,12 @@ class TicTacToe {
     fun allFieldsTaken() = true
 
     fun gameOver() = true
+
+    fun allFieldsInOneColumnAreTakenByPlayerTwo(): Boolean {
+        return true
+    }
+
+    fun allFieldsInOneColumnAreTakenByPlayerOne(): Boolean {
+        return true
+    }
 }
