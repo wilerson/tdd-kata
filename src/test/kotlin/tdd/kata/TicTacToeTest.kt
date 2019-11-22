@@ -74,7 +74,6 @@ class TicTacToeTest {
         assertFalse(take)
     }
 
-
     @Test
     fun playerOnlyCanTakeAFieldIfHasNotBeenTaken() {
         val ticTacToe = TicTacToe(arrayOf(arrayOf(1, 0, 0), arrayOf(1, 1, 1), arrayOf(1, 1, 1)))
@@ -82,5 +81,15 @@ class TicTacToeTest {
         val take = ticTacToe.take(0, 1, 1)
 
         assertTrue(take)
+    }
+
+
+    @Test
+    fun playersShouldTakeTurns() {
+        val ticTacToe = TicTacToe(arrayOf(arrayOf(0, 0, 0), arrayOf(1, 1, 1), arrayOf(1, 1, 1)))
+
+        assertTrue(ticTacToe.take(0, 0, 1))
+        assertFalse(ticTacToe.take(0, 1, 1))
+        assertTrue(ticTacToe.take(0, 1, -1))
     }
 }

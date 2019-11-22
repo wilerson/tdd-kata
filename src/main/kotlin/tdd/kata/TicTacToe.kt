@@ -8,6 +8,7 @@ import kotlin.math.abs
 class TicTacToe(
     private var gameState: Array<Array<Int>> = arrayOf(arrayOf(0, 0, 0), arrayOf(0, 0, 0), arrayOf(0, 0, 0))
 ) {
+    private var playerTurn = 1
 
     fun hasGameFinished(): Boolean {
         return areAllFieldsInOneColumnTaken() ||
@@ -43,8 +44,17 @@ class TicTacToe(
         return diagonalOne || diagonalTwo
     }
 
+    private fun isTurnOf(player: Int): Boolean {
+        if (player == playerTurn) {
+            playerTurn *= (-1)
+            return true
+        }
+
+        return false
+    }
+
     fun take(i: Int, j: Int, value: Int): Boolean {
-        if (gameState[i][j] == 0) {
+        if (gameState[i][j] == 0 && isTurnOf(value)) {
             gameState[i][j] = value
             return true
         }
