@@ -3,24 +3,23 @@
  */
 package tdd.kata
 
-import kotlin.test.assertEquals
-
+import org.junit.Test
+import kotlin.test.assertFalse
+import kotlin.test.assertTrue
 
 class TicTacToeTest {
-    private val ticTacToe = TicTacToe()
 
-    @org.junit.Test
-    fun thatGameIsOverWhenAllFieldsAreTaken() {
-        assertEquals(ticTacToe.allFieldsTaken(), ticTacToe.gameOver())
+    @Test
+    fun thatGameIsNotOverAtTheBeginning() {
+        val ticTacToe = TicTacToe()
+
+        assertFalse(ticTacToe.gameOver())
     }
 
-    @org.junit.Test
-    fun thatGameIsOverWhenAllFieldsInAColumnAreTakeByPlayerOne() {
-        assertEquals(ticTacToe.gameOver(), ticTacToe.allFieldsInOneColumnAreTakenByPlayerOne())
-    }
+    @Test
+    fun thatGameIsOverWhenEverythingIsTaken() {
+        val ticTacToe = TicTacToe(arrayOf(arrayOf(1, 1, 1), arrayOf(1, 1, 1), arrayOf(1, 1, 1)))
 
-    @org.junit.Test
-    fun thatGameIsOverWhenAllFieldsInAColumnAreTakeByPlayerTwo() {
-        assertEquals(ticTacToe.gameOver(), ticTacToe.allFieldsInOneColumnAreTakenByPlayerTwo())
+        assertTrue(ticTacToe.gameOver())
     }
 }

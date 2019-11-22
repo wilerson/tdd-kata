@@ -3,16 +3,18 @@
  */
 package tdd.kata
 
-class TicTacToe {
-    fun allFieldsTaken() = true
+class TicTacToe(
+    private var gameState: Array<Array<Int>> = arrayOf(arrayOf(0, 0, 0), arrayOf(0, 0, 0), arrayOf(0, 0, 0))
+) {
 
-    fun gameOver() = true
-
-    fun allFieldsInOneColumnAreTakenByPlayerTwo(): Boolean {
-        return true
-    }
-
-    fun allFieldsInOneColumnAreTakenByPlayerOne(): Boolean {
+    fun gameOver(): Boolean {
+        for (row in gameState) {
+            for (columnRow in row) {
+                if (columnRow == 0) {
+                    return false
+                }
+            }
+        }
         return true
     }
 }
