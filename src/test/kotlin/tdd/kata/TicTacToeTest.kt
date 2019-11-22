@@ -22,4 +22,25 @@ class TicTacToeTest {
 
         assertTrue(ticTacToe.gameOver())
     }
+
+    @Test
+    fun aGameIsNotOverWhenAllFieldsInAColumnAreTakenByAPlayer() {
+        val ticTacToe = TicTacToe(arrayOf(arrayOf(1, 1, 1), arrayOf(0, 0, 0), arrayOf(0, 0, 1)))
+
+        assertFalse(ticTacToe.gameOver())
+    }
+
+    @Test
+    fun aGameIsNotOverWhenAllFieldsInAColumnAreTakenByDifferentPlayers() {
+        val ticTacToe = TicTacToe(arrayOf(arrayOf(1, 1, 1), arrayOf(-1, -1, -1), arrayOf(0, 0, 0)))
+
+        assertFalse(ticTacToe.gameOver())
+    }
+
+    @Test
+    fun aGameIsOverWhenAllFieldsInAColumnAreTakenByAPlayer() {
+        val ticTacToe = TicTacToe(arrayOf(arrayOf(1, 1, 1), arrayOf(0, 0, 1), arrayOf(0, 0, 1)))
+
+        assertTrue(ticTacToe.gameOver())
+    }
 }

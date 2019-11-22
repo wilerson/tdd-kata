@@ -3,18 +3,33 @@
  */
 package tdd.kata
 
+import kotlin.math.abs
+
 class TicTacToe(
     private var gameState: Array<Array<Int>> = arrayOf(arrayOf(0, 0, 0), arrayOf(0, 0, 0), arrayOf(0, 0, 0))
 ) {
 
     fun gameOver(): Boolean {
+
+        var fieldsTaken = 0
         for (row in gameState) {
             for (columnRow in row) {
-                if (columnRow == 0) {
-                    return false
+                if (columnRow != 0) {
+                    fieldsTaken++
                 }
             }
         }
-        return true
+        return gameHasFinishedForOneColumn() || (fieldsTaken == 9)
+    }
+
+    private fun gameHasFinishedForOneColumn(): Boolean {
+        val sumOfColumns = arrayOf(0, 0, 0)
+        for (row in gameState) {
+            for ((index, field) in row.withIndex()) {
+                sumOfColumns[index] += field
+            }
+        }
+
+        return (abs(sumOfColumns[0]) == 3 || abs(sumOfColumns[1]) == 3 || abs(sumOfColumns[2]) == 3)
     }
 }
