@@ -9,44 +9,46 @@ class TicTacToe(
     private var gameState: Array<Array<Int>> = arrayOf(arrayOf(0, 0, 0), arrayOf(0, 0, 0), arrayOf(0, 0, 0))
 ) {
 
-    fun gameOver(): Boolean {
+    fun hasGameFinished(): Boolean {
+        return areAllFieldsInOneColumnTaken() ||
+                areAllFieldsInOneRowTaken() ||
+                areDiagonalsTakenForOnePlayer() ||
+                haveAllFieldsBeenTaken()
+    }
 
-        var fieldsTaken = 0
-        for (row in gameState) {
-            for (columnRow in row) {
-                if (columnRow != 0) {
-                    fieldsTaken++
-                }
-            }
-        }
-        return areAllFieldsInOneColumnTaken() || areAllFieldsInOneRowTaken() || areDiagonalsTakenForOnePlayer() || (fieldsTaken == 9)
+    private fun haveAllFieldsBeenTaken(): Boolean {
+        return gameState.flatten().contains(0).not()
     }
 
     private fun areAllFieldsInOneColumnTaken(): Boolean {
-        val sumOfColumns = arrayOf(0, 0, 0)
-        for (row in gameState) {
-            for ((index, field) in row.withIndex()) {
-                sumOfColumns[index] += field
-            }
-        }
+        val rowOne = abs(gameState[0][0] + gameState[1][0] + gameState[2][0]) == 3
+        val rowTwo = abs(gameState[0][1] + gameState[1][1] + gameState[2][1]) == 3
+        val rowThree = abs(gameState[0][2] + gameState[1][2] + gameState[2][2]) == 3
 
-        return (abs(sumOfColumns[0]) == 3 || abs(sumOfColumns[1]) == 3 || abs(sumOfColumns[2]) == 3)
+        return rowOne || rowTwo || rowThree
     }
 
     private fun areAllFieldsInOneRowTaken(): Boolean {
-        for (row in gameState) {
-            var sumOfFieldValues = 0
-            for (field in row) {
-                sumOfFieldValues += field
-            }
-            if (abs(sumOfFieldValues) == 3) return true
-        }
-        return false
+        val rowOne = abs(gameState[0][0] + gameState[0][1] + gameState[0][2]) == 3
+        val rowTwo = abs(gameState[1][0] + gameState[1][1] + gameState[1][2]) == 3
+        val rowThree = abs(gameState[2][0] + gameState[2][1] + gameState[2][2]) == 3
+
+        return rowOne || rowTwo || rowThree
     }
 
-    fun areDiagonalsTakenForOnePlayer(): Boolean {
+    private fun areDiagonalsTakenForOnePlayer(): Boolean {
         val diagonalOne = abs(gameState[0][0] + gameState[1][1] + gameState[2][2]) == 3
         val diagonalTwo = abs(gameState[0][2] + gameState[1][1] + gameState[2][0]) == 3
+
         return diagonalOne || diagonalTwo
+    }
+
+    fun take(i: Int, j: Int, value: Int): Boolean {
+        if (gameState[i][j] == 0) {
+            gameState[i][j] = value
+            return true
+        }
+
+        return false
     }
 }
