@@ -24,15 +24,15 @@ class TicTacToeTest {
     }
 
     @Test
-    fun aGameIsNotOverWhenAllFieldsInAColumnAreTakenByAPlayer() {
-        val ticTacToe = TicTacToe(arrayOf(arrayOf(1, 1, 1), arrayOf(0, 0, 0), arrayOf(0, 0, 1)))
+    fun aGameIsNotOverWhenAllFieldsInAColumnAreNotTakenByAPlayer() {
+        val ticTacToe = TicTacToe(arrayOf(arrayOf(1, -1, 1), arrayOf(0, 0, 0), arrayOf(0, 0, 1)))
 
         assertFalse(ticTacToe.gameOver())
     }
 
     @Test
     fun aGameIsNotOverWhenAllFieldsInAColumnAreTakenByDifferentPlayers() {
-        val ticTacToe = TicTacToe(arrayOf(arrayOf(1, 1, 1), arrayOf(-1, -1, -1), arrayOf(0, 0, 0)))
+        val ticTacToe = TicTacToe(arrayOf(arrayOf(1, -1, 1), arrayOf(-1, 1, -1), arrayOf(1, 0, 0)))
 
         assertFalse(ticTacToe.gameOver())
     }
@@ -40,6 +40,20 @@ class TicTacToeTest {
     @Test
     fun aGameIsOverWhenAllFieldsInAColumnAreTakenByAPlayer() {
         val ticTacToe = TicTacToe(arrayOf(arrayOf(1, 1, 1), arrayOf(0, 0, 1), arrayOf(0, 0, 1)))
+
+        assertTrue(ticTacToe.gameOver())
+    }
+
+    @Test
+    fun aGameIsOverWhenAllFieldsInARowAreTakenByAPlayer() {
+        val ticTacToe = TicTacToe(arrayOf(arrayOf(1, 1, 1), arrayOf(0, 0, 0), arrayOf(0, 0, 0)))
+
+        assertTrue(ticTacToe.gameOver())
+    }
+
+    @Test
+    fun aGameIsOverWhenAllFieldsInAnotherRowAreTakenByAPlayer() {
+        val ticTacToe = TicTacToe(arrayOf(arrayOf(0, 0, 0), arrayOf(1, 1, 1), arrayOf(0, 0, 0)))
 
         assertTrue(ticTacToe.gameOver())
     }

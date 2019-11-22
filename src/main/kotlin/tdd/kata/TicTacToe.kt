@@ -19,10 +19,10 @@ class TicTacToe(
                 }
             }
         }
-        return gameHasFinishedForOneColumn() || (fieldsTaken == 9)
+        return areAllFieldsInOneColumnTaken() || areAllFieldsInOneRowTaken() || (fieldsTaken == 9)
     }
 
-    private fun gameHasFinishedForOneColumn(): Boolean {
+    private fun areAllFieldsInOneColumnTaken(): Boolean {
         val sumOfColumns = arrayOf(0, 0, 0)
         for (row in gameState) {
             for ((index, field) in row.withIndex()) {
@@ -31,5 +31,16 @@ class TicTacToe(
         }
 
         return (abs(sumOfColumns[0]) == 3 || abs(sumOfColumns[1]) == 3 || abs(sumOfColumns[2]) == 3)
+    }
+
+    private fun areAllFieldsInOneRowTaken(): Boolean {
+        for (row in gameState) {
+            var sumOfFieldValues = 0
+            for (field in row) {
+                sumOfFieldValues += field
+            }
+            if (abs(sumOfFieldValues) == 3) return true
+        }
+        return false
     }
 }
